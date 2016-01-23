@@ -1,0 +1,22 @@
+{
+  "name": "tamamo",
+  "version": "0.0.1",
+  "description": "twitter client for picture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akameco/tamamo.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "akameco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akameco/tamamo/issues"
+  },
+  "homepage": "https://github.com/akameco/tamamo#readme"
+}

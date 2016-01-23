@@ -1,7 +1,7 @@
 'use strict';
 const electron = require('electron');
 const app = electron.app;
-const Twitter = require('twit');
+const Twitter = require('./src/twitter-event');
 const config = require('./config.json');
 
 require('electron-debug')({
@@ -9,31 +9,6 @@ require('electron-debug')({
 });
 
 let mainWindow;
-
-const twitterConfig = {
-  consumer_key: config.auth.consumerKey,
-  consumer_secret: config.auth.consumerSecret,
-  access_token: config.auth.accessToken,
-  access_token_secret: config.auth.accessTokenSecret
-};
-
-const T = new Twitter(twitterConfig);
-
-function users(listId) {
-  return new Promise(resolve => {
-    T.get('lists/members', {list_id: listId, count: 5000}, (err, data) => {
-      if (err) {
-        console.log(err);
-      }
-      const userIds = data.users.map(user => {
-        return user.id
-      });
-      resolve(userIds);
-    });
-  });
-}
-
-const listId = config.listId;
 
 function onClosed() {
   mainWindow = null;
@@ -65,20 +40,10 @@ app.on('activate', () => {
 
 app.on('ready', () => {
   mainWindow = createMainWindow();
-
-  const T = new Twitter(twitterConfig);
-  const listId = config.listId;
-  users(listId).then(userIds => {
-    const userStream = T.stream('statuses/filter', {follow: userIds.join()})
-    userStream.on('tweet', tweet => {
-      if (userIds.indexOf(tweet.user.id) !== -1) {
-        // 画像が含まれている場合
-        // if (tweet.extended_entities) {
-        console.log(tweet.user.name, tweet.text);
-        mainWindow.webContents.send('tweet', tweet);
-        // }
-      }
-    });
+  const twitter = new Twitter(config).stream();
+  twitter.on('tweet', tweet => {
+    console.log(tweet.text);
+    mainWindow.webContents.send('tweet', JSON.stringify(tweet));
   });
 });
 

@@ -1,7 +1,7 @@
 'use strict';
 const electron = require('electron');
 const app = electron.app;
-const Twitter = require('./src/twitter-event');
+const Twitter = require('./src/main/twitter-event');
 const config = require('./config.json');
 
 require('electron-debug')({
@@ -16,8 +16,8 @@ function onClosed() {
 
 function createMainWindow() {
   const win = new electron.BrowserWindow({
-    width: 900,
-    height: 600
+    width: 400,
+    height: 500
   });
 
   win.loadURL(`file://${__dirname}/index.html`);
@@ -40,9 +40,9 @@ app.on('activate', () => {
 
 app.on('ready', () => {
   mainWindow = createMainWindow();
-  const twitter = new Twitter(config).stream();
-  twitter.on('tweet', tweet => {
-    console.log(tweet.text);
+  const stream = new Twitter(config).stream();
+  stream.on('tweet', tweet => {
+    console.log(tweet);
     mainWindow.webContents.send('tweet', JSON.stringify(tweet));
   });
 });

@@ -37,11 +37,8 @@ class Twitter extends EventEmitter {
     this.users().then(userIds => {
       const userStream = this.T.stream('statuses/filter', {follow: userIds.join()})
       userStream.on('tweet', tweet => {
-        if (userIds.indexOf(tweet.user.id) !== -1) {
-          // 画像が含まれている場合
-          // if (tweet.extended_entities) {
+        if (userIds.indexOf(tweet.user.id) !== -1 && tweet.extended_entities) {
           this.emit('tweet', tweet);
-          // }
         }
       });
     });

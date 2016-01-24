@@ -1,13 +1,51 @@
 'use strict';
-const $ = require('jquery');
+import React from 'react';
+import {render} from 'react-dom';
+import Tweet from './src/renderer/components/tweet';
 const ipc = require('electron').ipcRenderer;
 
-$(() => {
-  ipc.on('tweet', (ev, data) => {
-    const tweet = JSON.parse(data);
-    console.log(tweet.text);
+class TweetBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = ({
+      media_url: 'https://pbs.twimg.com/media/CZbb4ITUAAI3rUk.jpg',
+      text: 'ようこそ',
+      screen_name: 'akameco',
+      hovered: false
+    });
 
-    const $li = $(`<li>${ tweet.text }</li>`);
-    $('#main').append($li);
-  });
-});
+    ipc.on('tweet', (ev, data) => {
+      const tweet = JSON.parse(data);
+
+      if (tweet.extended_entities) {
+        for (const image of tweet.extended_entities.media) {
+          console.log(image);
+          this.setState({
+            screen_name: tweet.user.screen_name,
+            text: tweet.text,
+            media_url: image.media_url
+          });
+        }
+      }
+    });
+  }
+
+  handleMouseOver() {
+    this.setState({hovered: true});
+  }
+
+  handleMouseOut () {
+    this.setState({hovered: false});
+  }
+
+  render() {
+    return (
+      <div onMouseOver={this.handleMouseOver.bind(this)}
+       onMouseOut={this.handleMouseOut.bind(this)} >
+        <Tweet data={this.state} />
+      </div>
+    );
+  }
+}
+
+render(<TweetBox />, document.querySelector('#main'));

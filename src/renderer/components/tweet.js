@@ -2,7 +2,6 @@ import React from 'react';
 import Img from './img';
 import {rtIcon} from './icon';
 
-
 export default class Tweet extends React.Component {
   render() {
     const {screen_name, text, media_url, hovered} = this.props.data;

@@ -2,7 +2,10 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Tweet from './src/renderer/components/tweet';
+import Controlbox from './src/renderer/components/controlbox';
 const ipc = require('electron').ipcRenderer;
+const webFrame = require('web-frame');
+webFrame.setZoomLevelLimits(1, 1);
 
 class TweetBox extends React.Component {
   constructor(props) {
@@ -43,6 +46,7 @@ class TweetBox extends React.Component {
       <div onMouseOver={this.handleMouseOver.bind(this)}
        onMouseOut={this.handleMouseOut.bind(this)} >
         <Tweet data={this.state} />
+        <Controlbox />
       </div>
     );
   }

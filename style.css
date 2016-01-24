@@ -7,23 +7,26 @@ body {
   font-family: -apple-system, 'Helvetica Neue', Helvetica, sans-serif;
   width: 400px;
   height: 500px;
+  overflow: hidden;
 }
 
 img {
-  position: fixed;
+  position: relative;
   width: 100%;
   height: 100%;
   min-width: 400px;
   min-height: 500px;
   background: rgba(106,106,106,0.80);
   border: 1px solid #979797;
+  z-index: 0;
 }
+
 .tweet {
   position: absolute;
   top: 15px;
   left: 5px;
   right: 5px;
-  min-width: 390px;
+  min-width: 380px;
   min-height: 150px;
   opacity: 0.90;
   background: rgba(0,0,0,0.50);
@@ -45,3 +48,43 @@ img {
   color: #FFFFFF;
   line-height: 19.83px;
 }
+
+.controlbox {
+  display: block;
+  position: absolute;
+  z-index: 100;
+  bottom: 15px;
+  left: 25px;
+  right: 25px;
+  width 350px;
+  height: 60px;
+  background: rgba(0,0,0,0.50);
+  border-radius: 5px;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+}
+
+.icon {
+  margin: 15px 25px;
+}
+
+.donwload {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  margin-top: -10px;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #4A90E2;
+  border: 1px solid #979797;
+}
+
+.donwload svg {
+  margin: 14px;
+}
+

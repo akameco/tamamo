@@ -15,10 +15,16 @@ function onClosed() {
 }
 
 function createMainWindow() {
+  const electronScreen = electron.screen;
+  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+
   const win = new electron.BrowserWindow({
     width: 400,
     height: 500,
-    resizable: false
+    x: size.width - 400,
+    y: size.height - 500,
+    resizable: false,
+    alwaysOnTop: true
   });
 
   win.loadURL(`file://${__dirname}/index.html`);
@@ -41,6 +47,7 @@ app.on('activate', () => {
 
 app.on('ready', () => {
   mainWindow = createMainWindow();
+
   const stream = new Twitter(config).stream();
   stream.on('tweet', tweet => {
     console.log(tweet);

@@ -57,7 +57,7 @@ img {
   left: 25px;
   right: 25px;
   width 350px;
-  height: 60px;
+  height: 40px;
   background: rgba(0,0,0,0.50);
   border-radius: 5px;
   text-align: center;
@@ -67,24 +67,27 @@ h1 {
   color: white;
 }
 
-.icon {
-  margin: 15px 25px;
-}
-
 .donwload {
-  display: inline-block;
-  width: 70px;
-  height: 70px;
-  margin-top: -10px;
-  text-align: center;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: 150px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: #4A90E2;
   border: 1px solid #979797;
 }
 
 .donwload svg {
-  margin: 14px;
+  margin-top: 10px;
+}
+
+.icon {
+  margin: 5px 60px;
+}
+
+svg {
+  width: 40px;
+  height: 30px;
 }
 

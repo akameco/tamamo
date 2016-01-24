@@ -1,5 +1,5 @@
 import React from 'react';
-import {RtIcon,HeartIcon,DownloadIcon} from './icon';
+import {RtIcon, HeartIcon, DownloadIcon} from './icon';
 
 export default class Controlbox extends React.Component {
   render() {

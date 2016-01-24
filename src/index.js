@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import {render} from 'react-dom';
-import Tweet from './src/renderer/components/tweet';
-import Controlbox from './src/renderer/components/controlbox';
+import Tweet from './renderer/components/tweet';
+import Controlbox from './renderer/components/controlbox';
 const ipc = require('electron').ipcRenderer;
 const webFrame = require('web-frame');
 webFrame.setZoomLevelLimits(1, 1);

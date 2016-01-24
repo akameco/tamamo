@@ -41,12 +41,18 @@ class TweetBox extends React.Component {
     this.setState({hovered: false});
   }
 
+  handleClick(e) {
+    const url = this.state.media_url;
+    console.log(url);
+    ipc.send('download', url);
+  }
+
   render() {
     return (
       <div onMouseOver={this.handleMouseOver.bind(this)}
        onMouseOut={this.handleMouseOut.bind(this)} >
         <Tweet data={this.state} />
-        <Controlbox />
+        <Controlbox onClick={this.handleClick.bind(this)} />
       </div>
     );
   }

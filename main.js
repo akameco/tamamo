@@ -3,6 +3,10 @@ const electron = require('electron');
 const app = electron.app;
 const Twitter = require('./src/main/twitter-event');
 const config = require('./config.json');
+const ipcMain = require('electron').ipcMain;
+const fs = require('fs');
+const request = require('request');
+const path = require('path');
 
 require('electron-debug')({
   showDevTools: true
@@ -52,6 +56,26 @@ app.on('ready', () => {
   stream.on('tweet', tweet => {
     console.log(tweet);
     mainWindow.webContents.send('tweet', JSON.stringify(tweet));
+  });
+
+  ipcMain.on('download', (ev, media_url) => {
+    const fileName = path.basename(media_url);
+    request({method: 'GET', url: media_url, encoding: null}, (err, res, body) => {
+      if (err && res.statusCode !== 200) {
+        console.log(err);
+      }
+
+      const homeDir = process.env.HOME;
+      const savePath = path.resolve(homeDir, config.downloadPath, fileName);
+
+      fs.writeFile(savePath, body, 'binary', err => {
+        if (err) {
+          console.log(err);
+        }
+
+        console.log(`saved: ${savePath}`);
+      });
+    });
   });
 });
 

@@ -1,9 +1,17 @@
 import React from 'react';
-import {RtIcon, HeartIcon, DownloadIcon} from './icon';
+import {DownloadIcon, NextIcon, PrevIcon} from './icon';
 
 export default class Controlbox extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  _onPrevClick(e) {
+    this.props.onPrev(e);
+  }
+
+  _onNextClick(e) {
+    this.props.onNext(e);
   }
 
   _onClick(e) {
@@ -13,11 +21,15 @@ export default class Controlbox extends React.Component {
   render() {
     return (
       <div className='controlbox'>
-        <HeartIcon />
+        <div onClick={this._onNextClick.bind(this)}>
+          <NextIcon />
+        </div>
         <div onClick={this._onClick.bind(this)} className='donwload'>
           <DownloadIcon />
         </div>
-        <RtIcon />
+        <div onClick={this._onPrevClick.bind(this)}>
+          <PrevIcon />
+        </div>
       </div>
     );
   }

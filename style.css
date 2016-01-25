@@ -50,7 +50,7 @@ img {
 }
 
 .controlbox {
-  display: block;
+  display: flex;
   position: absolute;
   z-index: 100;
   bottom: 15px;
@@ -67,27 +67,19 @@ h1 {
   color: white;
 }
 
-.donwload {
-  position: absolute;
-  top: -5px;
-  left: 150px;
-  width: 50px;
-  height: 50px;
+.controlbox div{
+  margin: auto;
+}
+
+.controlbox .donwload {
+  width: 60px;
+  height: 60px;
+  margin-top: -10px;
   border-radius: 50%;
   background: #4A90E2;
   border: 1px solid #979797;
 }
 
 .donwload svg {
-  margin-top: 10px;
+  margin-top: 5px;
 }
-
-.icon {
-  margin: 5px 60px;
-}
-
-svg {
-  width: 40px;
-  height: 30px;
-}
-

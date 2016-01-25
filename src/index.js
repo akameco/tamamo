@@ -40,6 +40,23 @@ class TweetBox extends React.Component {
         }
       }
     });
+
+    this.handlePrev = this.handlePrev.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleDownloadClick = this.handleDownloadClick.bind(this)
+  }
+
+  componentDidMount() {
+    const body = document.querySelector('body');
+    body.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    const body = document.querySelector('body');
+    body.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleMouseOver() {
@@ -71,14 +88,22 @@ class TweetBox extends React.Component {
     console.log('next', e);
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 39) {
+      this.handlePrev(e);
+    } else if (e.keyCode === 37) {
+      this.handleNext(e);
+    }
+  }
+
   render() {
     return (
-      <div onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)} >
+      <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} >
         <Tweet data={this.state.data[this.state.current]} hovered={this.state.hovered} />
         <Controlbox
-          onClick={this.handleDownloadClick.bind(this)}
-          onPrev={this.handlePrev.bind(this)}
-          onNext={this.handleNext.bind(this)} />
+          onClick={this.handleDownloadClick}
+          onPrev={this.handlePrev}
+          onNext={this.handleNext} />
       </div>
     );
   }

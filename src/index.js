@@ -3,23 +3,18 @@ import React from 'react';
 import {render} from 'react-dom';
 import Tweet from './renderer/components/tweet';
 import Controlbox from './renderer/components/controlbox';
-const ipc = require('electron').ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
 const webFrame = require('web-frame');
 webFrame.setZoomLevelLimits(1, 1);
 
 class TweetBox extends React.Component {
   constructor(props) {
     super(props);
+
     let data = [];
     data.push({
       media_url: 'https://pbs.twimg.com/media/CZbb4ITUAAI3rUk.jpg',
       text: 'ようこそ',
-      screen_name: 'akameco'
-    });
-
-    data.push({
-      media_url: 'https://pbs.twimg.com/media/CZHaKiKUMAA7k-V.png',
-      text: '萌画像',
       screen_name: 'akameco'
     });
 
@@ -29,7 +24,7 @@ class TweetBox extends React.Component {
       hovered: false
     });
 
-    ipc.on('tweet', (ev, data) => {
+    ipcRenderer.on('tweet', (ev, data) => {
       const tweet = JSON.parse(data);
 
       if (tweet.extended_entities) {
@@ -56,7 +51,7 @@ class TweetBox extends React.Component {
   }
 
   handleDownloadClick(e) {
-    ipc.send('download', this.state.data[this.state.current].media_url);
+    ipcRenderer.send('download', this.state.data[this.state.current].media_url);
     console.log(this.state.data);
   }
 

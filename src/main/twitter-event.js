@@ -33,6 +33,24 @@ class Twitter extends EventEmitter {
     });
   }
 
+  getList() {
+    return new Promise(resolve => {
+      this.T.get('lists/statuses', {
+        list_id: this.listId,
+        include_entities: true,
+        include_rts: true,
+        count: 200
+      }, (err, data) => {
+        if (err) {
+          console.log(err);
+        }
+
+        const tweets = data.filter(tweet => tweet.extended_entities).reverse();
+        resolve(tweets);
+      });
+    });
+  }
+
   stream() {
     this.users().then(userIds => {
       const userStream = this.T.stream('statuses/filter', {follow: userIds.join()})

@@ -50,7 +50,15 @@ app.on('activate', () => {
 app.on('ready', () => {
   mainWindow = createMainWindow();
 
-  const stream = new Twitter(config).stream();
+  const twitter = new Twitter(config);
+
+  twitter.getList().then(tweets => {
+    for (const tweet of tweets) {
+      mainWindow.webContents.send('tweet', JSON.stringify(tweet));
+    }
+  });
+
+  const stream = twitter.stream();
   stream.on('tweet', tweet => {
     console.log(tweet);
     mainWindow.webContents.send('tweet', JSON.stringify(tweet));

@@ -36,7 +36,9 @@ class TweetBox extends React.Component {
             media_url: image.media_url
           };
           this.setState({data: this.state.data.concat([obj])});
-          this.setState({current: this.state.data.length - 1});
+          if (this.state.current === this.state.data.length - 2) {
+            this.setState({current: this.state.data.length - 1});
+          }
         }
       }
     });
@@ -77,7 +79,6 @@ class TweetBox extends React.Component {
       return null;
     }
     this.setState({current: this.state.current - 1})
-    console.log('prev', e);
   }
 
   handleNext(e) {
@@ -85,7 +86,6 @@ class TweetBox extends React.Component {
       return null;
     }
     this.setState({current: this.state.current + 1})
-    console.log('next', e);
   }
 
   handleKeyDown(e) {

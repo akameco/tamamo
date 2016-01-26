@@ -1,10 +1,10 @@
 'use strict';
 const electron = require('electron');
 const app = electron.app;
-const Twitter = require('./src/main/twitter-event');
-const config = require('./config.json');
+const Twitter = require('./main/twitter-event');
+const config = require('../config.json');
 const ipcMain = require('electron').ipcMain;
-const download = require('./src/main/tweet-action').download;
+const download = require('./main/tweet-action').download;
 
 require('electron-debug')({
   showDevTools: true
@@ -29,7 +29,7 @@ function createMainWindow() {
     alwaysOnTop: true
   });
 
-  win.loadURL(`file://${__dirname}/index.html`);
+  win.loadURL(`file://${__dirname}/renderer/index.html`);
   win.on('closed', onClosed);
 
   return win;

@@ -2,10 +2,10 @@
   "name": "tamamo",
   "version": "0.0.1",
   "description": "twitter client for picture.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "watch": "watchify -t babelify ./src/index.js --im -o ./bundle.js",
+    "watch": "watchify -t babelify ./src/renderer/index.js --im -o ./dest/bundle.js",
     "test": "ava"
   },
   "repository": {

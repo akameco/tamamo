@@ -1,6 +1,7 @@
 'use strict';
 const EventEmitter = require('events');
 const twit = require('twit');
+const filter = require('./filter');
 
 class Twitter extends EventEmitter {
   constructor(config) {
@@ -45,7 +46,9 @@ class Twitter extends EventEmitter {
           console.log(err);
         }
 
-        const tweets = data.filter(tweet => tweet.extended_entities).reverse();
+        const tweets = data
+          .filter(tweet => tweet.extended_entities && filter(tweet))
+          .reverse();
         resolve(tweets);
       });
     });
@@ -55,7 +58,7 @@ class Twitter extends EventEmitter {
     this.users().then(userIds => {
       const userStream = this.T.stream('statuses/filter', {follow: userIds.join()})
       userStream.on('tweet', tweet => {
-        if (userIds.indexOf(tweet.user.id) !== -1 && tweet.extended_entities) {
+        if (userIds.indexOf(tweet.user.id) !== -1 && filter(tweet)) {
           this.emit('tweet', tweet);
         }
       });

@@ -93,6 +93,8 @@ class TweetBox extends React.Component {
       this.handlePrev(e);
     } else if (e.keyCode === 37) {
       this.handleNext(e);
+    } else if (e.keyCode === 83) {
+      this.handleDownloadClick(e);
     }
   }
 

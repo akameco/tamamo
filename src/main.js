@@ -26,7 +26,6 @@ function createMainWindow() {
     x: size.width - 400,
     y: size.height - 500,
     alwaysOnTop: true
-    // resizable: false,
   });
 
   win.loadURL(`file://${__dirname}/renderer/index.html`);

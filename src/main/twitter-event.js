@@ -1,23 +1,25 @@
 'use strict';
 const EventEmitter = require('events');
-const twit = require('twit');
+const Twit = require('twit');
+const config = require('../../config.json');
 const filter = require('./filter');
 
 class Twitter extends EventEmitter {
-  constructor(config) {
+  constructor(token) {
     super();
     this.listId = config.listId;
-    this.create(config);
+    this.create(token);
   }
 
-  create(config) {
-    const twitterConfig = {
-      consumer_key: config.auth.consumerKey,
-      consumer_secret: config.auth.consumerSecret,
-      access_token: config.auth.accessToken,
-      access_token_secret: config.auth.accessTokenSecret
+  create(token) {
+    const auth = require('../../res/credential.json');
+    const config = {
+      consumer_key: auth.consumerKey,
+      consumer_secret: auth.consumerSecret,
+      access_token: token.accessToken,
+      access_token_secret: token.accessTokenSecret
     };
-    this.T = new twit(twitterConfig);
+    this.T = new Twit(config);
   }
 
   users() {

@@ -11,7 +11,7 @@ class TweetBox extends React.Component {
   constructor(props) {
     super(props);
 
-    let data = [];
+    const data = [];
     data.push({
       media_url: 'https://pbs.twimg.com/media/CZbb4ITUAAI3rUk.jpg',
       text: 'ようこそ',
@@ -19,7 +19,7 @@ class TweetBox extends React.Component {
     });
 
     this.state = ({
-      data: data,
+      data,
       current: 0,
       hovered: false
     });
@@ -29,7 +29,7 @@ class TweetBox extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.handleDownloadClick = this.handleDownloadClick.bind(this)
+    this.handleDownloadClick = this.handleDownloadClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,27 +65,27 @@ class TweetBox extends React.Component {
     this.setState({hovered: true});
   }
 
-  handleMouseOut () {
+  handleMouseOut() {
     this.setState({hovered: false});
   }
 
-  handleDownloadClick(e) {
+  handleDownloadClick() {
     ipcRenderer.send('download', this.state.data[this.state.current].media_url);
     console.log(this.state.data);
   }
 
-  handlePrev(e) {
+  handlePrev() {
     if (this.state.current === 0) {
       return null;
     }
-    this.setState({current: this.state.current - 1})
+    this.setState({current: this.state.current - 1});
   }
 
-  handleNext(e) {
+  handleNext() {
     if (this.state.current === this.state.data.length - 1) {
       return null;
     }
-    this.setState({current: this.state.current + 1})
+    this.setState({current: this.state.current + 1});
   }
 
   handleKeyDown(e) {

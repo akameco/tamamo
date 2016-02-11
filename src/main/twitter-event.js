@@ -29,7 +29,7 @@ class Twitter extends EventEmitter {
           console.log(err);
         }
         const userIds = data.users.map(user => {
-          return user.id
+          return user.id;
         });
         resolve(userIds);
       });
@@ -58,7 +58,7 @@ class Twitter extends EventEmitter {
 
   stream() {
     this.users().then(userIds => {
-      const userStream = this.T.stream('statuses/filter', {follow: userIds.join()})
+      const userStream = this.T.stream('statuses/filter', {follow: userIds.join()});
       userStream.on('tweet', tweet => {
         if (userIds.indexOf(tweet.user.id) !== -1 && filter(tweet)) {
           this.emit('tweet', tweet);

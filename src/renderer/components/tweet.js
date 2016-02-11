@@ -4,7 +4,7 @@ export default class Tweet extends React.Component {
   render() {
     const {screen_name, text, media_url, hovered} = this.props.data;
     const display = this.props.hovered ? 'block' : 'none';
-    const divStyle = {display: display};
+    const divStyle = {display};
 
     return (
       <div>

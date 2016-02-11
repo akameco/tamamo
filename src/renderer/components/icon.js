@@ -1,5 +1,4 @@
 import React from 'react';
-
 export const RtIcon = () => (
 <svg className='icon' width="45px" height="35px" viewBox="0 0 45 35">
     <g stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">

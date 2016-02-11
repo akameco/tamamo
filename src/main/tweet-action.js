@@ -22,4 +22,4 @@ module.exports.download = mediaUrl => {
       console.log(`saved: ${savePath}`);
     });
   });
-}
+};

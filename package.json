@@ -5,7 +5,9 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "build": "browserify -t babelify ./src/renderer/index.js --im -o ./dest/bundle.js",
     "watch": "watchify -t babelify ./src/renderer/index.js --im -o ./dest/bundle.js",
+    "postinstall": "npm run build",
     "test": "ava"
   },
   "repository": {

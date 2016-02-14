@@ -25,7 +25,9 @@ function createMainWindow() {
     height: 500,
     x: size.width - 400,
     y: size.height - 500,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    transparent: true,
+    titleBarStyle: 'hidden-inset'
   });
 
   win.loadURL(`file://${__dirname}/renderer/index.html`);

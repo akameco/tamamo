@@ -112,3 +112,4 @@ class TweetBox extends React.Component {
 }
 
 render(<TweetBox />, document.querySelector('#main'));
+render(<TweetBox />, document.querySelector('.main'));

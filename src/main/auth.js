@@ -1,7 +1,7 @@
 'use strict';
 const electron = require('electron');
 const TwitterAPI = require('node-twitter-api');
-const config = require('../../config.json');
+const credential = require('../../res/credential.json');
 const writeToken = require('./config-manager').writeToken;
 
 const authorize = () => {
@@ -18,8 +18,8 @@ const authorize = () => {
     }
 
     const twitter = new TwitterAPI({
-      consumerKey: config.auth.consumerKey,
-      consumerSecret: config.auth.consumerSecret,
+      consumerKey: credential.consumerKey,
+      consumerSecret: credential.consumerSecret,
       callback: 'http://example.com'
     });
 

@@ -4,7 +4,7 @@ const app = electron.app;
 const Twitter = require('./main/twitter-event');
 const ipcMain = require('electron').ipcMain;
 const download = require('./main/tweet-action').download;
-const AuthWin = require('./main/auth');
+const authorize = require('./main/auth');
 
 require('electron-debug')({
   showDevTools: true
@@ -47,9 +47,7 @@ app.on('activate', () => {
 });
 
 app.on('ready', () => {
-  const authWin = new AuthWin();
-  authWin.authorize().then(token => {
-    console.log(token);
+  authorize().then(token => {
     mainWindow = createMainWindow();
 
     const twitter = new Twitter(token);

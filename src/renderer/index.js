@@ -1,19 +1,17 @@
-'use strict';
-import React from 'react';
+import React, {Component} from 'react';
 import {render} from 'react-dom';
 import Tweet from './components/tweet';
-import Controlbox from './components/controlbox';
 const ipcRenderer = require('electron').ipcRenderer;
 const webFrame = require('web-frame');
 webFrame.setZoomLevelLimits(1, 1);
 
-class TweetBox extends React.Component {
+class TweetBox extends Component {
   constructor(props) {
     super(props);
 
     const data = [];
     data.push({
-      media_url: 'https://pbs.twimg.com/media/CZbb4ITUAAI3rUk.jpg',
+      media_url: 'https://pbs.twimg.com/media/CbAuXCJVIAAtwn1.jpg',
       text: 'ようこそ',
       screen_name: 'akameco'
     });
@@ -99,17 +97,39 @@ class TweetBox extends React.Component {
   }
 
   render() {
+    const display = this.state.hovered ? 'block' : 'none';
+    const divStyle = {display};
+
     return (
       <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} >
-        <Tweet data={this.state.data[this.state.current]} hovered={this.state.hovered} />
-        <Controlbox
-          onClick={this.handleDownloadClick}
-          onPrev={this.handlePrev}
-          onNext={this.handleNext} />
+        <img src={this.state.data[this.state.current].media_url} />
+        <div style={divStyle} >
+          <Tweet data={this.state.data[this.state.current]} />
+          <DownloadButton onDownloadClick={this.handleDownloadClick}/>
+        </div>
       </div>
     );
   }
 }
 
-render(<TweetBox />, document.querySelector('#main'));
+class DownloadButton extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleClick(e) {
+    this.props.onDownloadClick(e);
+  }
+
+  render() {
+    return (
+      <div>
+        <a className='download-btn' onClick={this.handleClick.bind(this)}>
+          save
+        </a>
+      </div>
+    );
+  }
+}
+
 render(<TweetBox />, document.querySelector('.main'));

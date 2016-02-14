@@ -16,68 +16,43 @@ img {
   height: 100%;
   background: rgba(106,106,106,0.80);
   border: 1px solid #979797;
-  z-index: 0;
+  cursor: zoom-in;
 }
 
 .tweet {
-  position: absolute;
-  top: 15px;
-  left: 5px;
-  right: 5px;
-  min-width: 380px;
-  min-height: 150px;
-  opacity: 0.90;
-  background: rgba(0,0,0,0.50);
+  font-family: Helvetica;
   display: block;
-  border-radius: 5px;
+  position: absolute;
+  min-width: calc(100% - 20px);
+  margin: 5px;
   padding: 5px;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.50);
+  border: 1px solid #000;
+  opacity: 0.9;
 }
 
 .tweet__screen_name {
-  font-family: Helvetica;
-  font-size: 18.46px;
   color: #FFFFFF;
-  line-height: 22px;
 }
 
 .tweet__text {
-  font-family: HiraginoSans-W2;
-  font-size: 15px;
+  font-size: 0.8em;
   color: #FFFFFF;
-  line-height: 19.83px;
 }
 
-.controlbox {
-  display: flex;
+.download-btn {
   position: absolute;
-  z-index: 100;
-  bottom: 15px;
-  left: 25px;
-  right: 25px;
-  width 350px;
-  height: 40px;
-  background: rgba(0,0,0,0.50);
-  border-radius: 5px;
-  text-align: center;
+  bottom: 10px;
+  right: 10px;
+  border: 1px solid #666;
+  color: #f4f4f4;
+  padding: 5px 20px;
+  background: #4aaaa5;
+  cursor: pointer;
 }
-
-h1 {
-  color: white;
-}
-
-.controlbox div{
-  margin: auto;
-}
-
-.controlbox .donwload {
-  width: 60px;
-  height: 60px;
-  margin-top: -10px;
-  border-radius: 50%;
-  background: #4A90E2;
-  border: 1px solid #979797;
-}
-
-.donwload svg {
-  margin-top: 5px;
+.download-btn:hover {
+  color: #FFF;
+  background-color: #2a8a85;
+  text-decoration: underline;
 }

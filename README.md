@@ -1,5 +1,7 @@
 # tamamo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/akameco/tamamo.svg)](https://greenkeeper.io/)
+
 > twitter client for picture.
 
 ## Installation
